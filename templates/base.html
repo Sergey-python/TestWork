@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>
+			{% block title %}
+				Test
+			{% endblock %}	
+		</title>
+	</head>
+
+	<body>
+		<a href="{% url 'categories_url' %}"> КАТЕГОРИИ </a>
+		<a href="{% url 'list_products_url' %}"> ВСЕ ТОВАРЫ </a>
+		<a href="{% url 'create_product_url' %}"> ДОБАВИТЬ ТОВАР </a>
+		<p><a href="/admin"> АВТОРИЗАЦИЯ </a></p>
+		
+		{% block content %}
+			There is no content
+		{% endblock %}
+		<table align="center" cellpadding="6">
+			<tr>
+				{% for n in page_object.paginator.page_range %}
+					{% if page_object.number == n %}
+						<td><a href="?page={{ n }}"><strong><em> {{ n }} </em></strong></a></td>
+					{% else %}
+						<td><a href="?page={{ n }}"> {{ n }} </a></td>
+					{% endif %}
+				{% endfor %}
+			</tr>			
+		</table>
+	</body>
+</html>

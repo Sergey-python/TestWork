@@ -1,0 +1,30 @@
+{% extends 'products/base_products.html' %}
+
+{% block title %}
+	Products
+{% endblock %}
+
+{% block content %}
+	<table border="5" align="center" bgcolor="grey" cellpadding="6">		
+
+				<tr>
+					{% for row_name in row_names %}				
+						<td><strong> {{ row_name }} </strong></td>
+					{% endfor %}
+						<td colspan="2"><strong> Действия </strong></td>					
+				</tr>		
+			{% for product in page_object.object_list %}
+				<tr>					
+					<td> {{ product.product_name }} </td>
+					<td><em> {{ product.product_category }} </em></td>
+					<td> {{ product.product_detail }} </td>
+					<td> {{ product.product_price }} </td>
+					<td> {{ product.product_amount }} </td>
+					<td><a href="{% url 'edit_product_url' product_name=product.product_name %}"> Редактировать <a></td>
+					<td><a href="{% url 'delete_product_url' product_name=product.product_name %}"> Удалить </a></td>				
+				</tr>
+			{% endfor %}
+			
+	</table>		
+
+{% endblock %}

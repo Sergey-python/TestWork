@@ -1,0 +1,38 @@
+{% extends 'products/base_products.html' %}
+
+{% block title %}
+	Edit product
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'edit_product_url' product_name=product_name %}" method="post">
+	{% csrf_token %}
+	<table border="5" align="center" bgcolor="grey" cellpadding="6">
+		<tr>
+			{% for field in bound_form %}
+				<td><strong> {{ field.label }} </strong></td>									
+			{% endfor %}
+				<td colspan="2"><strong> Действия </strong></td>					
+		</tr>
+		{% for product in products %}
+			<tr>
+				{% ifequal product_name product.product_name %}
+					{% for field in bound_form %}
+						<td> {{ field }} </td>									
+					{% endfor %}						
+						<td><button type="submit"> Добавить? </button></td>
+						<td><a href="{% url 'list_products_url' %}"> Отмена </a></td>						
+				{% else %}
+					<td> {{ product.product_name }} </td>
+					<td><em> {{ product.product_category }} </em></td>					
+					<td> {{ product.product_detail }} </td>
+					<td> {{ product.product_price }} </td>
+					<td> {{ product.product_amount }} </td>
+					<td><a href="{% url 'edit_product_url' product_name=product.product_name %}"> Редактировать <a></td>
+					<td><a href="{% url 'delete_product_url' product_name=product.product_name %}"> Удалить </a></td>
+				{% endifequal %}
+			</tr>
+		{% endfor %}
+	</table>
+</form>
+{% endblock %}

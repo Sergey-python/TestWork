@@ -1,0 +1,24 @@
+{% extends 'products/base_products.html' %}
+
+
+{% block title %}
+	Categories
+{% endblock %}
+
+
+
+{% block content %}
+
+	<table border="5" align="center" bgcolor="grey" cellpadding="50">	
+
+		<tr>
+			{% for category in categories %}
+
+				<td> <a href="{% url 'products_category_url' product_category=category %}"><h1>{{ category }}</h1></a> </td>
+
+			{% endfor %}
+		</tr>
+
+	</table>
+
+{% endblock %}
